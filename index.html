@@ -4,1018 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sea Leader Marine - Discover Paradise</title>
+    <title>Sea Leader Marine - Premium Speedboat Experience</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --bg-dark: #0f172a;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-light: #94a3b8;
-            --border-color: #e2e8f0;
-            --accent-blue: #0066ff;
-            --accent-blue-hover: #0052cc;
-            --accent-cyan: #06b6d4;
-            --card-bg: #ffffff;
-            --nav-bg: rgba(255, 255, 255, 0.85);
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
-            --gradient-3: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        [data-theme="dark"] {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-dark: #020617;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --text-light: #94a3b8;
-            --border-color: #334155;
-            --card-bg: #1e293b;
-            --nav-bg: rgba(15, 23, 42, 0.85);
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Navigation with Glass Morphism */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: var(--nav-bg);
-            backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .navbar.scrolled {
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            transform: translateY(0);
-        }
-
-        .nav-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 80px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            font-size: 20px;
-            color: var(--text-primary);
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .boat-icon {
-            color: var(--accent-blue);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 8px 0;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 3px;
-            background: var(--gradient-2);
-            border-radius: 2px;
-            transform: translateX(-50%);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--accent-blue);
-        }
-
-        .nav-link:hover::before,
-        .nav-link.active::before {
-            width: 100%;
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .theme-toggle {
-            background: transparent;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            color: var(--text-primary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .theme-toggle::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--gradient-2);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--accent-blue);
-            transform: rotate(180deg) scale(1.1);
-        }
-
-        .theme-toggle:hover::before {
-            opacity: 0.1;
-        }
-
-        .btn-login {
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            padding: 10px 20px;
-            transition: all 0.3s ease;
-            border-radius: 10px;
-        }
-
-        .btn-login:hover {
-            color: var(--accent-blue);
-            background: rgba(0, 102, 255, 0.05);
-        }
-
-        .btn-register {
-            background: var(--gradient-2);
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-register::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .btn-register:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 102, 255, 0.4);
-        }
-
-        .btn-register:hover::before {
-            opacity: 1;
-        }
-
-        /* Hero Section with Video Background */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            margin-top: 80px;
-        }
-
-        .hero-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-            object-fit: cover;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 102, 255, 0.7) 0%, rgba(0, 212, 255, 0.5) 100%);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            padding: 100px 0;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border-radius: 50px;
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
-
-        .hero-title {
-            font-size: 72px;
-            font-weight: 900;
-            color: white;
-            margin-bottom: 24px;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-            animation: fadeInUp 1s ease-out 0.3s both;
-            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero-description {
-            font-size: 20px;
-            color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 40px;
-            line-height: 1.8;
-            animation: fadeInUp 1s ease-out 0.4s both;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-
-        .btn-primary {
-            background: white;
-            color: var(--accent-blue);
-            border: none;
-            padding: 18px 36px;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 17px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: var(--gradient-2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-        }
-
-        .btn-primary:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            color: white;
-        }
-
-        .btn-primary span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn-primary svg {
-            position: relative;
-            z-index: 1;
-            transition: transform 0.3s ease;
-        }
-
-        .btn-primary:hover svg {
-            transform: translateX(5px);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            padding: 16px 36px;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 17px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: var(--accent-blue);
-            border-color: white;
-            transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Features Section with Parallax Wave */
-        .features {
-            position: relative;
-            padding: 120px 0;
-            background: linear-gradient(180deg, #0066ff 0%, #00a8ff 100%);
-            overflow: hidden;
-        }
-
-        .features::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            left: 0;
-            right: 0;
-            height: 150px;
-            background: var(--bg-primary);
-            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%);
-        }
-
-        .wave-background {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.3;
-        }
-
-        .features-grid {
-            position: relative;
-            z-index: 2;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 32px;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px 28px;
-            border-radius: 24px;
-            text-align: center;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
-            transform: scale(1.5);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 24px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-blue);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .feature-card:hover .feature-icon {
-            transform: scale(1.15) rotateY(360deg);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-        }
-
-        .feature-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover .feature-title {
-            transform: scale(1.05);
-        }
-
-        .feature-description {
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
-        }
-
-        /* Destinations with Creative Cards */
-        .destinations {
-            padding: 120px 0;
-            background: var(--bg-primary);
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .section-badge {
-            display: inline-block;
-            background: var(--gradient-2);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-size: 56px;
-            font-weight: 900;
-            margin-bottom: 16px;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        .section-subtitle {
-            font-size: 20px;
-            color: var(--text-secondary);
-        }
-
-        .destinations-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .destination-card {
-            background: var(--card-bg);
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid var(--border-color);
-            position: relative;
-            transform-style: preserve-3d;
-        }
-
-        .destination-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--gradient-2);
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            z-index: 1;
-            border-radius: 28px;
-        }
-
-        .destination-card:hover::before {
-            opacity: 0.1;
-        }
-
-        .destination-card:hover {
-            transform: translateY(-16px) rotateX(2deg);
-            box-shadow: 0 30px 80px rgba(0, 102, 255, 0.25);
-        }
-
-        .destination-image {
-            width: 100%;
-            height: 320px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .destination-image::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
-            z-index: 1;
-        }
-
-        .destination-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .destination-card:hover .destination-image img {
-            transform: scale(1.15) rotate(2deg);
-        }
-
-        .destination-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: white;
-            color: var(--accent-blue);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 700;
-            z-index: 2;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        .destination-content {
-            padding: 32px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .destination-title {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-            transition: color 0.3s ease;
-        }
-
-        .destination-card:hover .destination-title {
-            color: var(--accent-blue);
-        }
-
-        .destination-description {
-            font-size: 15px;
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-            line-height: 1.7;
-        }
-
-        .destination-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-            padding-bottom: 24px;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .duration {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-
-        .price {
-            font-weight: 800;
-            color: var(--accent-blue);
-            font-size: 24px;
-        }
-
-        .btn-destination {
-            width: 100%;
-            background: var(--gradient-2);
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 6px 25px rgba(0, 102, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-destination::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-        }
-
-        .btn-destination:hover::before {
-            width: 400px;
-            height: 400px;
-        }
-
-        .btn-destination:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 102, 255, 0.4);
-        }
-
-        /* CTA Section with Animated Waves */
-        .cta {
-            position: relative;
-            padding: 0;
-            overflow: hidden;
-            background: rgb(0, 81, 255);
-        }
-
-        .cta-inner {
-            position: relative;
-            padding: 120px 0 200px 0;
-            z-index: 2;
-        }
-
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .cta-title {
-            font-size: 64px;
-            font-weight: 900;
-            color: white;
-            margin-bottom: 24px;
-            line-height: 1.2;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .cta-description {
-            font-size: 20px;
-            color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 48px;
-            line-height: 1.8;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        .btn-cta {
-            background: white;
-            color: var(--accent-blue);
-            border: none;
-            padding: 20px 48px;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 18px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-cta::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: var(--gradient-2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-        }
-
-        .btn-cta:hover::before {
-            width: 400px;
-            height: 400px;
-        }
-
-        .btn-cta:hover {
-            transform: translateY(-6px) scale(1.05);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            color: white;
-        }
-
-        .btn-cta span,
-        .btn-cta svg {
-            position: relative;
-            z-index: 1;
-        }
-
-        .waves-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 150px;
-            z-index: 1;
-        }
-
-        .parallax>use {
-            animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
-        }
-
-        .parallax>use:nth-child(1) {
-            animation-delay: -2s;
-            animation-duration: 7s;
-        }
-
-        .parallax>use:nth-child(2) {
-            animation-delay: -3s;
-            animation-duration: 10s;
-        }
-
-        .parallax>use:nth-child(3) {
-            animation-delay: -4s;
-            animation-duration: 13s;
-        }
-
-        .parallax>use:nth-child(4) {
-            animation-delay: -5s;
-            animation-duration: 20s;
-        }
-
-        @keyframes move-forever {
-            0% {
-                transform: translate3d(-90px, 0, 0);
-            }
-
-            100% {
-                transform: translate3d(85px, 0, 0);
-            }
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--bg-dark);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 80px 0 40px;
-            position: relative;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 60px;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            font-size: 20px;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .footer-description {
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.8;
-        }
-
-        .footer-heading {
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 24px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 16px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .footer-links a:hover {
-            color: white;
-            transform: translateX(5px);
-        }
-
-        .footer-bottom {
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-
-        .footer-bottom p {
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .nav-links {
-                display: none;
-            }
-
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .destinations-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 48px;
-            }
-
-            .section-title {
-                font-size: 40px;
-            }
-
-            .cta-title {
-                font-size: 42px;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .destinations-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-
-            .btn-login {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="SLM Logo (Black).png" alt="Sea Leader Marine Logo" class="loading-logo-img"
+                    style="max-width: 200px;">
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <p>Preparing your marine adventure...</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container">
             <div class="nav-content">
                 <div class="logo">
-                    <svg class="boat-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <path
-                            d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1">
-                        </path>
-                        <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"></path>
-                        <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"></path>
-                    </svg>
-                    <span class="logo-text">Sea Leader Marine</span>
+                    <img src="SLM Logo (Black).png" alt="Sea Leader Marine Logo" class="logo-img"
+                        style="max-width: 300px;">
                 </div>
                 <div class="nav-links">
                     <a href="#home" class="nav-link active">Home</a>
@@ -1048,55 +68,47 @@
             </div>
         </div>
     </nav>
+
     <!-- Hero Section with Video -->
-    <section id="home" class="hero" style="position:relative; height:100vh; width:100%; overflow:hidden;">
+    <section id="home" class="hero">
+        <div class="hero-video-container">
+            <div class="hero-video-wrapper">
+                <!-- Fallback image -->
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80"
+                    alt="Ocean Background" class="hero-fallback-image">
 
-        <!-- VIDEO BACKGROUND -->
-        <div class="hero-video-wrapper"
-            style="position:absolute; inset:0; width:100%; height:100%; overflow:hidden; z-index:0;">
-
-            <!-- Wistia Player Scripts -->
-            <script src="https://fast.wistia.com/player.js" async></script>
-            <script src="https://fast.wistia.com/embed/2j315bj1da.js" async type="module"></script>
-
-            <!-- Fallback blur thumbnail -->
-            <style>
-                <wistia-player media-id="2j315bj1da"
-                autoplay muted loop playsinline controls="hidden"
-                iframe="true"
-                style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; pointer-events:none;"></wistia-player>
-            </style>
-
-            <!-- Background Video Player -->
-            <wistia-player media-id="2j315bj1da" aspect="1.7777777777777777" autoplay muted loop playsinline
-                controls="hidden"
-                style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; pointer-events:none;">
-            </wistia-player>
+                <!-- Wistia Video -->
+                <wistia-player media-id="2j315bj1da" aspect="1.7777777777777777" autoplay muted loop playsinline
+                    controls="hidden" class="hero-video">
+                </wistia-player>
+            </div>
         </div>
 
-        <!-- DARK OVERLAY (supaya teks terbaca) -->
-        <div class="hero-overlay" style="position:absolute; inset:0; background:rgba(0,0,0,0.35); z-index:1;"></div>
+        <!-- OVERLAY -->
+        <div class="hero-overlay"></div>
 
         <!-- CONTENT -->
-        <div class="container" style="position:relative; z-index:2;">
+        <div class="container">
             <div class="hero-content">
-                <div class="hero-badge">
+                <div class="hero-badge animate-on-scroll" data-delay="0">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polygon
                             points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
                         </polygon>
                     </svg>
-                    #1 Speedboat Service in Thailand
+                    premium Service in indonesia
                 </div>
 
-                <h1 class="hero-title">Discover Paradise</h1>
+                <h1 class="hero-title animate-on-scroll" data-delay="100">
+                    Discover Paradise
+                </h1>
 
-                <p class="hero-description">
+                <p class="hero-description animate-on-scroll" data-delay="200">
                     Book your island adventure with Sea Leader Marine. Experience the beauty of Thailand's islands with
                     our premium speedboat services and create unforgettable memories.
                 </p>
 
-                <div class="hero-buttons">
+                <div class="hero-buttons animate-on-scroll" data-delay="300">
                     <button class="btn-primary">
                         <span>Book Your Trip</span>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1110,43 +122,19 @@
                 </div>
             </div>
         </div>
-
     </section>
 
-    <!-- ENFORCE VIDEO LOOP (WISTIA SOMETIMES NEEDS THIS) -->
-    <script>
-        window._wq = window._wq || [];
-        _wq.push({
-            id: "2j315bj1da",
-            onReady: function (video) {
-                video.setPlaybackRate(1);
-                video.replay = true;   // WISTIA LOOP FIX
-                video.loop = true;     // fallback
-                video.play();
-            }
-        });
-    </script>
-
-    </script>
-
-
-    <!-- Features Section with Wave Background -->
+    <!-- Features Section with Parallax -->
     <section class="features">
-        <svg class="wave-background" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
-            preserveAspectRatio="none">
-            <path
-                d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
-                opacity=".25"></path>
-            <path
-                d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
-                opacity=".5"></path>
-            <path
-                d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z">
-            </path>
-        </svg>
+        <div class="features-parallax-bg"></div>
         <div class="container">
+            <div class="section-header animate-on-scroll" data-delay="0">
+                <div class="section-badge">WHY CHOOSE US</div>
+                <h2 class="section-title">Premium Marine Experience</h2>
+                <p class="section-subtitle">Experience the difference with our exceptional services</p>
+            </div>
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll" data-delay="100">
                     <div class="feature-icon">
                         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
@@ -1160,7 +148,7 @@
                     <h3 class="feature-title">Premium Fleet</h3>
                     <p class="feature-description">Modern speedboats and luxury yachts with world-class amenities</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll" data-delay="200">
                     <div class="feature-icon">
                         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
@@ -1170,7 +158,7 @@
                     <h3 class="feature-title">Safety First</h3>
                     <p class="feature-description">Certified crew and top-tier safety equipment on every journey</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll" data-delay="300">
                     <div class="feature-icon">
                         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
@@ -1182,7 +170,7 @@
                     <h3 class="feature-title">5-Star Experience</h3>
                     <p class="feature-description">Award-winning tours with exceptional customer service</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-on-scroll" data-delay="400">
                     <div class="feature-icon">
                         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
@@ -1200,23 +188,22 @@
     <!-- Destinations -->
     <section class="destinations" id="destinations">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-on-scroll" data-delay="0">
                 <div class="section-badge">EXPLORE</div>
                 <h2 class="section-title">Popular Destinations</h2>
-                <p class="section-subtitle">Discover the most breathtaking islands in Thailand</p>
+                <p class="section-subtitle">Discover the most breathtaking islands in Indonesia</p>
             </div>
             <div class="destinations-grid">
-                <div class="destination-card">
+                <div class="destination-card animate-on-scroll" data-delay="100">
                     <div class="destination-image">
                         <div class="destination-badge">TRENDING</div>
                         <img src="https://images.unsplash.com/photo-1709034042010-543a7fcd91cb?w=800&q=80"
-                            alt="Koh Phi Phi">
+                            alt="asha resort">
                     </div>
                     <div class="destination-content">
-                        <h3 class="destination-title">Koh Phi Phi</h3>
+                        <h3 class="destination-title">Asha Resort</h3>
                         <p class="destination-description">
-                            Experience stunning limestone cliffs and crystal clear turquoise waters of this tropical
-                            paradise island.
+                            Asha Resort is one of the most unique resorts that you could find in the Thousand Islands. It is located in Pulau Payung
                         </p>
                         <div class="destination-meta">
                             <span class="duration">
@@ -1225,24 +212,23 @@
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
-                                4 hours
+                                45 Minutes
                             </span>
                             <span class="price">฿1,200</span>
                         </div>
                         <button class="btn-destination">Book Now</button>
                     </div>
                 </div>
-                <div class="destination-card">
+                <div class="destination-card animate-on-scroll" data-delay="200">
                     <div class="destination-image">
                         <div class="destination-badge">POPULAR</div>
                         <img src="https://images.unsplash.com/photo-1608788524926-41b5181b89a2?w=800&q=80"
                             alt="James Bond Island">
                     </div>
                     <div class="destination-content">
-                        <h3 class="destination-title">James Bond Island</h3>
+                        <h3 class="destination-title">Oba Resort</h3>
                         <p class="destination-description">
-                            Visit the iconic island from the 007 movie, surrounded by stunning emerald green waters and
-                            caves.
+                            Oba Resort is a private resort located in the Genteng Kecil Island. The resort provides multiple exciting facilities that you can enjoy and a top notch accommodation
                         </p>
                         <div class="destination-meta">
                             <span class="duration">
@@ -1251,23 +237,23 @@
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
-                                6 hours
+                                90 Minutes
                             </span>
                             <span class="price">฿1,500</span>
                         </div>
                         <button class="btn-destination">Book Now</button>
                     </div>
                 </div>
-                <div class="destination-card">
+                <div class="destination-card animate-on-scroll" data-delay="300">
                     <div class="destination-image">
                         <div class="destination-badge">NEW</div>
                         <img src="https://images.unsplash.com/photo-1483683804023-6ccdb62f86ef?w=800&q=80"
                             alt="Coral Island">
                     </div>
                     <div class="destination-content">
-                        <h3 class="destination-title">Coral Island</h3>
+                        <h3 class="destination-title">Pari Island</h3>
                         <p class="destination-description">
-                            Perfect for snorkeling and diving with vibrant coral reefs and diverse tropical marine life.
+                            Pari Island is one of the inhabited island that is developing very fast to become a tourist island in the Thousand Islands of Jakarta
                         </p>
                         <div class="destination-meta">
                             <span class="duration">
@@ -1276,7 +262,7 @@
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
-                                5 hours
+                                90 Minutes
                             </span>
                             <span class="price">฿1,000</span>
                         </div>
@@ -1292,12 +278,12 @@
         <div class="cta-inner">
             <div class="container">
                 <div class="cta-content">
-                    <h2 class="cta-title">Ready For Your Adventure?</h2>
-                    <p class="cta-description">
+                    <h2 class="cta-title animate-on-scroll" data-delay="0">Ready For Your Adventure?</h2>
+                    <p class="cta-description animate-on-scroll" data-delay="100">
                         Join thousands of happy travelers who have experienced the magic of Thailand's islands with our
                         premium speedboat services
                     </p>
-                    <button class="btn-cta">
+                    <button class="btn-cta animate-on-scroll" data-delay="200">
                         <span>Start Booking Now</span>
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
@@ -1331,14 +317,8 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <div class="footer-logo">
-                        <svg class="boat-icon" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path
-                                d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1">
-                            </path>
-                            <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"></path>
-                            <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"></path>
-                        </svg>
+                        <img src="SLM Logo (Black).png" alt="Sea Leader Marine Logo" class="footer-logo-img"
+                            style="max-width: 150px;">
                         <span>Sea Leader Marine</span>
                     </div>
                     <p class="footer-description">
@@ -1376,149 +356,10 @@
         </div>
     </footer>
 
-    <script>
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const html = document.documentElement;
-        const sunIcon = document.querySelector('.sun-icon');
-        const moonIcon = document.querySelector('.moon-icon');
-
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        html.setAttribute('data-theme', currentTheme);
-
-        if (currentTheme === 'dark') {
-            sunIcon.style.display = 'none';
-            moonIcon.style.display = 'block';
-        }
-
-        themeToggle.addEventListener('click', () => {
-            const theme = html.getAttribute('data-theme');
-            const newTheme = theme === 'light' ? 'dark' : 'light';
-
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-
-            if (newTheme === 'dark') {
-                sunIcon.style.display = 'none';
-                moonIcon.style.display = 'block';
-            } else {
-                sunIcon.style.display = 'block';
-                moonIcon.style.display = 'none';
-            }
-        });
-
-        // Navbar Scroll Effect
-        const navbar = document.getElementById('navbar');
-        let lastScroll = 0;
-
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-
-            lastScroll = currentScroll;
-        });
-
-        // Smooth Scroll for Navigation
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-
-                if (targetSection) {
-                    const offsetTop = targetSection.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-
-                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Intersection Observer for Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements
-        document.querySelectorAll('.feature-card, .destination-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(40px)';
-            el.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-            observer.observe(el);
-        });
-
-        // Parallax Effect for Hero
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-
-        // Button Ripple Effect
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', function (e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-
-                ripple.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    background: rgba(255, 255, 255, 0.5);
-                    border-radius: 50%;
-                    left: ${x}px;
-                    top: ${y}px;
-                    transform: scale(0);
-                    animation: ripple-effect 0.6s ease-out;
-                    pointer-events: none;
-                `;
-
-                this.style.position = 'relative';
-                this.style.overflow = 'hidden';
-                this.appendChild(ripple);
-
-                setTimeout(() => ripple.remove(), 600);
-            });
-        });
-
-        // Add ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple-effect {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        console.log('🚤 Sea Leader Marine Premium - Loaded Successfully!');
-    </script>
+    <!-- Wistia Script -->
+    <script src="https://fast.wistia.com/player.js" async></script>
+    <script src="https://fast.wistia.com/embed/2j315bj1da.js" async type="module"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
